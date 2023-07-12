@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlaneMovments : MonoBehaviour
 {
-    public float FlySpeed = 5f;
-    public float accelaration = 0.2f;
+    public float FlySpeed = 0f;
+    public float accelaration = 5f;
     public float YawAmount = 120f;
 
     private float Yaw;
@@ -26,7 +26,7 @@ public class PlaneMovments : MonoBehaviour
 
 
         Yaw += horizon * YawAmount * Time.deltaTime;
-        float pitch = Mathf.Lerp(0, 20, Mathf.Abs(vertic)) * Mathf.Sign(vertic);
+        float pitch = Mathf.Lerp(0, 40, Mathf.Abs(vertic)) * Mathf.Sign(vertic);
         float roll = Mathf.Lerp(0, 30, Mathf.Abs(horizon)) * -Mathf.Sign(horizon);
 
         transform.localRotation = Quaternion.Euler(Vector3.up * Yaw + Vector3.right * pitch + Vector3.forward * roll);
@@ -38,14 +38,14 @@ public class PlaneMovments : MonoBehaviour
 
     private void speedIncrease()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && FlySpeed!=30)
         {
             FlySpeed = FlySpeed+accelaration;
         }
     }
     private void speedDecrease()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && FlySpeed!=5)
         {
             FlySpeed = FlySpeed - accelaration;
         }
